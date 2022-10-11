@@ -5,6 +5,8 @@ pygame.init()
 screen = pygame.display.set_mode((600,600))
 pygame.display.set_caption('Snake')
 
+points = 0
+
 snake_dir = [0,1]
 snake_last_move = [0,1]
 snake = [(200,200), (200-snake_dir[0]*10,200-snake_dir[1]*10), (200-snake_dir[0]*20,200-snake_dir[1]*20)]
@@ -54,6 +56,7 @@ while True:
     if collision(snake[0], apple_pos): 
         snake.append((0,0))
         apple_pos = random_pos()
+        points+=1
 
     for i in range(len(snake)-1 , 0 ,-1):
         snake[i] = (snake[i-1][0], snake[i-1][1])
@@ -64,6 +67,7 @@ while True:
     for i in range(len(snake)-1 , 0 ,-1):
         if collision(snake[i], snake[0]):
             snake = [(200,200), (200-snake_dir[0]*10,200-snake_dir[1]*10), (200-snake_dir[0]*20,200-snake_dir[1]*20)]
+            print("points: ",points)
             break
 
     screen.fill((0,0,0))
